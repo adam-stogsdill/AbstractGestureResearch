@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 
@@ -23,8 +22,6 @@ public class Main {
 
 
     public static void main(String[] args){
-        LocalTime start = LocalTime.now();
-
         FlowLayout flowLayout = new FlowLayout();
         try {
             fileWriter = new FileWriter(new File("AnnotationTimeStamps.txt"), true);
@@ -40,7 +37,9 @@ public class Main {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        Main.print(String.valueOf(ChronoUnit.SECONDS.between(LocalTime.now(), start) / 60) + " " + jb.getText());
+
+                        Main.print(String.valueOf(LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+                                + LocalTime.now().getSecond() + " " + jb.getText()));
                     } catch (IOException io) {
                         io.printStackTrace();
                     }
